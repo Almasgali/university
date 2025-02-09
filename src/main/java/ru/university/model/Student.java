@@ -8,8 +8,7 @@ public class Student {
     private String gender;
     private int groupId;
 
-    public Student(int id, String surname, String name,
-                   int age, String gender, int groupId) {
+    public Student(int id, String surname, String name, int age, String gender, int groupId) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -17,7 +16,4 @@ public class Student {
         this.gender = gender;
         this.groupId = groupId;
     }
-
-
-
 }
