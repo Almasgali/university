@@ -1,14 +1,15 @@
 package ru.university.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.university.model.Group;
 
-import javax.swing.text.html.parser.Parser;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,14 @@ public class GroupRepository implements Repository<Group> {
     public void loadAll() {
         Path path = Path.of(System.getProperty("user.home")).resolve("group.json");
         try {
-            groups.addAll(mapper.readValue(path.toFile(), new TypeReference<List<Group>>(){}));
+            if (Files.notExists(path)) {
+                Files.createFile(path);
+            }
+            groups.addAll(mapper.readValue(
+                    Files.newBufferedReader(path),
+                    new TypeReference<List<Group>>(){}));
+        } catch (JsonMappingException ignored) {
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
