@@ -1,7 +1,9 @@
 package ru.university.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.university.model.Curator;
+import ru.university.model.Group;
 
 import java.io.*;
 import java.net.URL;
@@ -20,16 +22,25 @@ public class CuratorRepository implements Repository<Curator> {
     @Override
     public void loadAll() {
         URL resource = this.getClass().getResource("/curator.json");
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(resource.openStream()))) {
-            br.lines().forEach(line -> {
-                try {
-                    curators.add(mapper.readValue(line, Curator.class));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        try {
+            mapper.readValue(resource, new TypeReference<List<Curator>>(){});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void saveAll() {
+
+    }
+
+    @Override
+    public void add(Curator entity) {
+
+    }
+
+    @Override
+    public List<Curator> list() {
+        return curators;
     }
 }
