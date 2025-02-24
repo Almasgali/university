@@ -16,8 +16,11 @@ public class ListExecutor implements Executor<Group> {
         while (i < args.length) {
             int finalI = i;
             switch (args[i]) {
+                case "help" -> showHelp();
                 case "-i" -> allGroups = allGroups.filter(g -> g.getId() == Integer.parseInt(args[finalI + 1]));
-                case "-s" -> allGroups = sortGroups(allGroups, args[i + 1]);
+                case "-n" -> allGroups = allGroups.filter(g -> g.getGroupName().equals(args[finalI + 1]));
+                case "-c" -> allGroups = allGroups.filter(g -> g.getCuratorId() == Integer.parseInt(args[finalI + 1]));
+                case "-sort" -> allGroups = sortGroups(allGroups, args[i + 1]);
                 case "-p" -> printOrder = args[i + 1];
             }
             i += 2;
@@ -34,6 +37,17 @@ public class ListExecutor implements Executor<Group> {
             System.out.println();
         });
         allGroups.close();
+    }
+
+    public void showHelp() {
+        System.out.println("""
+                group list command parameters:
+                -i = filter by id
+                -n = filter by group name
+                -c = filter by curator id
+                -sort
+                -p = print order
+                """);
     }
 
     private Stream<Group> sortGroups(Stream<Group> groups, String field) {

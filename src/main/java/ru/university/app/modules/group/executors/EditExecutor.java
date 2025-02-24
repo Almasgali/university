@@ -3,30 +3,29 @@ package ru.university.app.modules.group.executors;
 import ru.university.model.Group;
 import ru.university.repository.Repository;
 
-public class AddExecutor implements Executor<Group> {
+public class EditExecutor implements Executor<Group> {
 
     @Override
     public void execute(String[] args, Repository<Group> repository) {
-        Group group = new Group();
-        int i = 0;
+        long id = Long.parseLong(args[1]);
+        Group group = repository.get(id);
+        int i = 2;
         while (i < args.length) {
             switch (args[i]) {
                 case "help" -> showHelp();
-                case "-i" -> group.setId(Integer.parseInt(args[i + 1]));
                 case "-n" -> group.setGroupName(args[i + 1]);
                 case "-c" -> group.setCuratorId(Integer.parseInt(args[i + 1]));
             }
             i += 2;
         }
-        repository.add(group);
     }
 
     public void showHelp() {
         System.out.println("""
-                group add command parameters:
+                group edit command parameters:
                 -i = id
-                -n = name group
-                -c = curator id
+                -n = edit group name
+                -c = edit curator id
                 """);
     }
 }

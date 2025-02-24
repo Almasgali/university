@@ -1,12 +1,15 @@
 package ru.university.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.university.model.Curator;
-import ru.university.model.Group;
 
-import java.io.*;
-import java.net.URL;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +20,22 @@ public class CuratorRepository implements Repository<Curator> {
     public CuratorRepository() {
         this.curators = new ArrayList<>();
         this.mapper = new ObjectMapper();
+        loadAll();
     }
 
     @Override
     public void loadAll() {
-        URL resource = this.getClass().getResource("/curator.json");
+        Path path = Path.of(System.getProperty("user.home")).resolve("curator.json");
         try {
-            mapper.readValue(resource, new TypeReference<List<Curator>>(){});
+            if (Files.notExists(path)) {
+                Files.createFile(path);
+            }
+            curators.addAll(mapper.readValue(
+                    Files.newBufferedReader(path),
+                    new TypeReference<List<Curator>>() {
+                    }));
+        } catch (JsonMappingException ignored) {
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,12 +43,33 @@ public class CuratorRepository implements Repository<Curator> {
 
     @Override
     public void saveAll() {
-
+        Path path = Path.of(System.getProperty("user.home")).resolve("curator.json");
+        try (OutputStream os = Files.newOutputStream(path, StandardOpenOption.CREATE)) {
+            mapper.writeValue(os, curators);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void add(Curator entity) {
+        curators.add(entity);
+    }
 
+    @Override
+    public void delete(long id) {
+        curators.stream().filter(c -> c.getId() == id)
+                .findFirst().map(curators::remove);
+    }
+
+    @Override
+    public void deleteAll() {
+        curators.removeIf(c -> true);
+    }
+
+    @Override
+    public Curator get(long id) {
+        return curators.stream().filter(c -> c.getId() == id).findFirst().orElseThrow();
     }
 
     @Override

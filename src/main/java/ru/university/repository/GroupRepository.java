@@ -56,6 +56,22 @@ public class GroupRepository implements Repository<Group> {
     }
 
     @Override
+    public void delete(long id) {
+        groups.stream().filter(g -> g.getId() == id)
+                .findFirst().map(groups::remove);
+    }
+
+    @Override
+    public void deleteAll() {
+        groups.removeIf(g -> true);
+    }
+
+    @Override
+    public Group get(long id) {
+        return groups.stream().filter(g -> g.getId() == id).findFirst().orElseThrow();
+    }
+
+    @Override
     public List<Group> list() {
         return groups;
     }

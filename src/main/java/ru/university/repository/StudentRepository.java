@@ -1,12 +1,17 @@
 package ru.university.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.university.model.Group;
 import ru.university.model.Student;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +22,21 @@ public class StudentRepository implements Repository<Student> {
     public StudentRepository() {
         this.students = new ArrayList<>();
         this.mapper = new ObjectMapper();
+        loadAll();
     }
 
     @Override
     public void loadAll() {
-        URL resource = this.getClass().getResource("/student.json");
+        Path path = Path.of(System.getProperty("user.home")).resolve("student.json");
         try {
-            mapper.readValue(resource, new TypeReference<List<Student>>(){});
+            if (Files.notExists(path)) {
+                Files.createFile(path);
+            }
+            students.addAll(mapper.readValue(
+                    Files.newBufferedReader(path),
+                    new TypeReference<List<Student>>(){}));
+        } catch (JsonMappingException ignored) {
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,12 +44,33 @@ public class StudentRepository implements Repository<Student> {
 
     @Override
     public void saveAll() {
-
+        Path path = Path.of(System.getProperty("user.home")).resolve("student.json");
+        try (OutputStream os =  Files.newOutputStream(path, StandardOpenOption.CREATE)) {
+            mapper.writeValue(os, students);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void add(Student entity) {
+        students.add(entity);
+    }
 
+    @Override
+    public void delete(long id) {
+        students.stream().filter(s -> s.getId() == id)
+                .findFirst().map(students::remove);
+    }
+
+    @Override
+    public void deleteAll() {
+        students.removeIf(g -> true);
+    }
+
+    @Override
+    public Student get(long id) {
+        return students.stream().filter(s -> s.getId() == id).findFirst().orElseThrow();
     }
 
     @Override

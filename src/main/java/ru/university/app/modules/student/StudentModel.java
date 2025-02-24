@@ -1,28 +1,28 @@
-package ru.university.app.modules.group;
+package ru.university.app.modules.student;
 
-import ru.university.app.modules.group.executors.AddExecutor;
-import ru.university.app.modules.group.executors.DeleteExecutor;
-import ru.university.app.modules.group.executors.EditExecutor;
-import ru.university.app.modules.group.executors.ListExecutor;
+import ru.university.app.modules.student.executors.DeleteExecutor;
+import ru.university.app.modules.student.executors.EditExecutor;
+import ru.university.app.modules.student.executors.AddExecutor;
+import ru.university.app.modules.student.executors.ListExecutor;
 import ru.university.exception.UnexpectedParameterException;
-import ru.university.repository.GroupRepository;
+import ru.university.repository.StudentRepository;
 
 import java.util.Arrays;
 
-public class GroupModel {
-
-    private final GroupRepository groupRepository;
+public class StudentModel {
+    private final StudentRepository studentRepository;
     private final AddExecutor addExecutor;
     private final ListExecutor listExecutor;
     private final DeleteExecutor deleteExecutor;
     private final EditExecutor editExecutor;
 
-    public GroupModel() {
-        groupRepository = new GroupRepository();
+
+    public StudentModel() {
+        studentRepository = new StudentRepository();
         addExecutor = new AddExecutor();
         listExecutor = new ListExecutor();
-        editExecutor = new EditExecutor();
         deleteExecutor = new DeleteExecutor();
+        editExecutor = new EditExecutor();
     }
 
     public void executeCommand(String[] commandArgs) {
@@ -30,23 +30,23 @@ public class GroupModel {
             case "help" -> showHelp();
             case "add" -> addExecutor.execute(
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length),
-                    groupRepository);
+                    studentRepository);
             case "list" -> listExecutor.execute(
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length),
-                    groupRepository);
+                    studentRepository);
             case "delete" -> deleteExecutor.execute(
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length),
-                    groupRepository);
+                    studentRepository);
             case "edit" -> editExecutor.execute(
                     Arrays.copyOfRange(commandArgs, 1, commandArgs.length),
-                    groupRepository);
+                    studentRepository);
             default -> throw new UnexpectedParameterException(commandArgs[0]);
         }
     }
 
-    private void showHelp() {
+    void showHelp() {
         System.out.println("""
-                group module commands:
+                student module commands:
                 help
                 list
                 add
@@ -56,6 +56,6 @@ public class GroupModel {
     }
 
     public void close() {
-        groupRepository.saveAll();
+        studentRepository.saveAll();
     }
 }
