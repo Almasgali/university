@@ -21,6 +21,7 @@ public class ListExecutor implements Executor<Student> {
                 case "-s" -> allStudents = allStudents.filter(s -> s.getSurname().equals(args[finalI + 1]));
                 case "-n" -> allStudents = allStudents.filter(s -> s.getName().equals(args[finalI + 1]));
                 case "-g" -> allStudents = allStudents.filter(s -> s.getGender().name().equals(args[finalI + 1]));
+                case "-G" -> allStudents = allStudents.filter(s -> s.getGroupId() == Integer.parseInt(args[finalI + 1]));
                 case "-sort" -> allStudents = sortStudents(allStudents, args[i + 1]);
                 case "-p" -> printOrder = args[i + 1];
             }
@@ -44,13 +45,14 @@ public class ListExecutor implements Executor<Student> {
 
     public void showHelp() {
         System.out.println("""
-                student list command parameters:
-                -i = filter by id
-                -s = filter by surname
-                -n = filter by name
-                -g = filter by gender
-                -sort
-                -p = print order
+                Student list command parameters:
+                -i - filter by id
+                -s - filter by surname
+                -n - filter by name
+                -g - filter by gender
+                -G - filter by group ID
+                -sort - sorting by (id, surname, name, groupId)
+                -p - print order (e.g. isngG)
                 """);
     }
 

@@ -55,17 +55,23 @@ public class StudentRepository implements Repository<Student> {
     @Override
     public void add(Student entity) {
         students.add(entity);
+        System.out.println("Студент добавлен");
+        saveAll();
     }
 
     @Override
     public void delete(long id) {
         students.stream().filter(s -> s.getId() == id)
                 .findFirst().map(students::remove);
+        System.out.println("Студент удален");
+        saveAll();
     }
 
     @Override
     public void deleteAll() {
         students.removeIf(g -> true);
+        System.out.println("Все студенты удалены");
+        saveAll();
     }
 
     @Override

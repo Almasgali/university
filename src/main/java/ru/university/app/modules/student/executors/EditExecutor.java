@@ -23,11 +23,12 @@ public class EditExecutor implements Executor<Student> {
 
     public void showHelp() {
         System.out.println("""
-                student edit command parameters:
-                -s = edit surname
-                -n = edit name
-                -g = edit gender
-                -gi = edit group id
+                Student edit command parameters:
+                -i - ID (required first parameter)
+                -s - edit surname
+                -n - edit name
+                -g - edit gender
+                -gi - edit group ID
                 """);
     }
 }

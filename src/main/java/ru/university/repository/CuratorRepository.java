@@ -54,17 +54,23 @@ public class CuratorRepository implements Repository<Curator> {
     @Override
     public void add(Curator entity) {
         curators.add(entity);
+        System.out.println("Куратор добавлен");
+        saveAll();
     }
 
     @Override
     public void delete(long id) {
         curators.stream().filter(c -> c.getId() == id)
                 .findFirst().map(curators::remove);
+        System.out.println("Куратор удален");
+        saveAll();
     }
 
     @Override
     public void deleteAll() {
         curators.removeIf(c -> true);
+        System.out.println("Все кураторы удалены");
+        saveAll();
     }
 
     @Override

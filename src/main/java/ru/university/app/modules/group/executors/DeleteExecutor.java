@@ -23,10 +23,10 @@ public class DeleteExecutor implements Executor<Group> {
 
     public void showHelp() {
         System.out.println("""
-                group delete command parameters:
-                -i = delete by id
-                -a = delete all
-                -c = delete by curator id
+                Group delete command parameters:
+                -i - delete by ID
+                -a - delete all
+                -c - delete by curator ID
                 """);
     }
 }

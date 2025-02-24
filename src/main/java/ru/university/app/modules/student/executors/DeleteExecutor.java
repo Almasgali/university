@@ -23,10 +23,10 @@ public class DeleteExecutor implements Executor<Student>{
 
     public void showHelp() {
         System.out.println("""
-                student delete command parameters:
-                -i = delete by id
-                -a = delete all
-                -g = delete by group id
+                Student delete command parameters:
+                -i - delete by ID
+                -a - delete all
+                -g - delete by group ID
                 """);
     }
 }

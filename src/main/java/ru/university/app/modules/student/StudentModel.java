@@ -46,12 +46,12 @@ public class StudentModel {
 
     void showHelp() {
         System.out.println("""
-                student module commands:
+                Student module commands:
                 help
-                list
-                add
-                edit
-                delete
+                list - show students
+                add - add new student
+                edit - edit existing student
+                delete - delete student or all students
                 """);
     }
 

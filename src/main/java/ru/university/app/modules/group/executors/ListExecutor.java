@@ -41,12 +41,12 @@ public class ListExecutor implements Executor<Group> {
 
     public void showHelp() {
         System.out.println("""
-                group list command parameters:
-                -i = filter by id
-                -n = filter by group name
-                -c = filter by curator id
-                -sort
-                -p = print order
+                Group list command parameters:
+                -i - filter by id
+                -n - filter by group name
+                -c - filter by curator id
+                -sort - sorting by (id, name, curatorId)
+                -p - print order (e.g. inc)
                 """);
     }
 

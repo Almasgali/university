@@ -19,9 +19,9 @@ public class DeleteExecutor implements Executor<Curator>{
 
     public void showHelp() {
         System.out.println("""
-                curator delete command parameters:
-                -i = delete by id
-                -a = delete all
+                Curator delete command parameters:
+                -i - delete by ID
+                -a - delete all
                 """);
     }
 }

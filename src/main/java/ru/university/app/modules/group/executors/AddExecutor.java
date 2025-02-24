@@ -23,10 +23,10 @@ public class AddExecutor implements Executor<Group> {
 
     public void showHelp() {
         System.out.println("""
-                group add command parameters:
-                -i = id
-                -n = name group
-                -c = curator id
+                Group add command parameters:
+                -i - ID
+                -n - name group
+                -c - curator ID
                 """);
     }
 }

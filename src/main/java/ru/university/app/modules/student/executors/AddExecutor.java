@@ -25,12 +25,12 @@ public class AddExecutor implements Executor<Student> {
 
     public void showHelp() {
         System.out.println("""
-                group add command parameters:
-                -i = id
-                -s = surname
-                -n = name
-                -g = gender
-                -gi = group id
+                Student add command parameters:
+                -i - ID
+                -s - surname
+                -n - name
+                -g - gender
+                -gi - group ID
                 """);
     }
 }

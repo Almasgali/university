@@ -22,10 +22,10 @@ public class EditExecutor implements Executor<Group> {
 
     public void showHelp() {
         System.out.println("""
-                group edit command parameters:
-                -i = id
-                -n = edit group name
-                -c = edit curator id
+                Group edit command parameters:
+                -i - ID (required first parameter)
+                -n - edit group name
+                -c - edit curator ID
                 """);
     }
 }

@@ -46,12 +46,12 @@ public class GroupModel {
 
     private void showHelp() {
         System.out.println("""
-                group module commands:
+                Group module commands:
                 help
-                list
-                add
-                edit
-                delete
+                list - show groups
+                add - add new group
+                edit - edit existing group
+                delete - delete group or all groups
                 """);
     }
 

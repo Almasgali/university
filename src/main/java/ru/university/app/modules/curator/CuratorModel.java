@@ -45,12 +45,12 @@ public class CuratorModel {
 
     void showHelp() {
         System.out.println("""
-                curator module commands:
+                Curator module commands:
                 help
-                list
-                add
-                edit
-                delete
+                list - show curators
+                add - add new curator
+                edit - edit existing curator
+                delete - delete curator or all curators
                 """);
     }
 

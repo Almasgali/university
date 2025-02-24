@@ -21,10 +21,10 @@ public class EditExecutor implements Executor<Curator> {
 
     public void showHelp() {
         System.out.println("""
-                curator edit command parameters:
-                -i = id
-                -s = edit surname
-                -n = edit name
+                Curator edit command parameters:
+                -i - ID (required first parameter)
+                -s - edit surname
+                -n - edit name
                 """);
     }
 }

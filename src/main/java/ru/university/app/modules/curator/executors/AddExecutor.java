@@ -23,10 +23,10 @@ public class AddExecutor implements Executor<Curator> {
 
     public void showHelp() {
         System.out.println("""
-                curator add command parameters:
-                -i = id
-                -s = surname
-                -n = name
+                Curator add command parameters:
+                -i - ID
+                -s - surname
+                -n - name
                 """);
     }
 }

@@ -46,6 +46,12 @@ public class UniversityApplication {
     }
 
     private void showHelp() {
-
+        System.out.println("""
+                Сommands:
+                help
+                group
+                curator
+                student
+                """);
     }
 }

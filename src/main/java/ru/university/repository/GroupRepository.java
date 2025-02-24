@@ -53,17 +53,23 @@ public class GroupRepository implements Repository<Group> {
     @Override
     public void add(Group entity) {
         groups.add(entity);
+        System.out.println("Группа добавлена");
+        saveAll();
     }
 
     @Override
     public void delete(long id) {
         groups.stream().filter(g -> g.getId() == id)
                 .findFirst().map(groups::remove);
+        System.out.println("Группа удалена");
+        saveAll();
     }
 
     @Override
     public void deleteAll() {
         groups.removeIf(g -> true);
+        System.out.println("Все группы удалены");
+        saveAll();
     }
 
     @Override

@@ -41,12 +41,12 @@ public class ListExecutor implements Executor<Curator> {
 
     public void showHelp() {
         System.out.println("""
-                curator list command parameters:
-                -i = filter by id
-                -s = filter by surname
-                -n = filter by name
-                -sort
-                -p = print order
+                Curator list command parameters:
+                -i - filter by ID
+                -s - filter by surname
+                -n - filter by name
+                -sort - sorting by (id, surname, name)
+                -p - print order (e.g. isn)
                 """);
     }
 
