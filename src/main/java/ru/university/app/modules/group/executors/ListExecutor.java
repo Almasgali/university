@@ -52,9 +52,9 @@ public class ListExecutor implements Executor<Group> {
 
     private Stream<Group> sortGroups(Stream<Group> groups, String field) {
         return switch (field) {
-            case "id" -> groups.sorted(Comparator.comparingInt(Group::getId));
+            case "id" -> groups.sorted(Comparator.comparingLong(Group::getId));
             case "name" -> groups.sorted(Comparator.comparing(Group::getGroupName));
-            case "curatorId" -> groups.sorted(Comparator.comparingInt(Group::getCuratorId));
+            case "curatorId" -> groups.sorted(Comparator.comparingLong(Group::getCuratorId));
             default -> throw new UnexpectedParameterException(field);
         };
     }

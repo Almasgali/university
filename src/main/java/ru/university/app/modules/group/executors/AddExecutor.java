@@ -12,7 +12,7 @@ public class AddExecutor implements Executor<Group> {
         while (i < args.length) {
             switch (args[i]) {
                 case "help" -> showHelp();
-                case "-i" -> group.setId(Integer.parseInt(args[i + 1]));
+                case "-i" -> group.setId(Long.parseLong(args[i + 1]));
                 case "-n" -> group.setGroupName(args[i + 1]);
                 case "-c" -> group.setCuratorId(Integer.parseInt(args[i + 1]));
             }

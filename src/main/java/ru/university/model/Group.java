@@ -2,20 +2,20 @@ package ru.university.model;
 
 public class Group {
 
-    private int id;
+    private long id;
     private String groupName;
-    private int curatorId;
+    private long curatorId;
 
     public Group() {
     }
 
-    public Group(int id, String groupName, int curatorId) {
+    public Group(long id, String groupName, int curatorId) {
         this.id = id;
         this.groupName = groupName;
         this.curatorId = curatorId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -23,11 +23,11 @@ public class Group {
         return groupName;
     }
 
-    public int getCuratorId() {
+    public long getCuratorId() {
         return curatorId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public void setCuratorId(int curatorId) {
+    public void setCuratorId(long curatorId) {
         this.curatorId = curatorId;
     }
 }

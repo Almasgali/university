@@ -139,7 +139,7 @@ public class GroupsTableWindow extends JInternalFrame {
                     ? groupRepository.list().get(row)
                     : new Group();
 
-            group.setId((int) model.getValueAt(row, 0));
+            group.setId((long) model.getValueAt(row, 0));
             group.setGroupName(groupName);
             group.setCuratorId(curatorId);
 
@@ -190,7 +190,7 @@ public class GroupsTableWindow extends JInternalFrame {
         }
     }
 
-    private int getNextId() {
-        return groupRepository.list().stream().mapToInt(Group::getId).max().orElse(0) + 1;
+    private long getNextId() {
+        return groupRepository.list().stream().mapToLong(Group::getId).max().orElse(0) + 1;
     }
 }
