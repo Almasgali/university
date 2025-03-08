@@ -17,6 +17,9 @@ public class EditExecutor implements Executor<Group> {
                 case "-c" -> group.setCuratorId(Integer.parseInt(args[i + 1]));
             }
             i += 2;
+            if (!args[i - 2].equals("help")) {
+                System.out.println("Данные исправлены");
+            }
         }
     }
 

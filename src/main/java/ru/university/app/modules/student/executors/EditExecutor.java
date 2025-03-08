@@ -18,6 +18,9 @@ public class EditExecutor implements Executor<Student> {
                 case "-gi" -> student.setGroupId(Integer.parseInt(args[i + 1]));
             }
             i += 2;
+            if (!args[i - 2].equals("help")) {
+                System.out.println("Данные исправлены");
+            }
         }
     }
 

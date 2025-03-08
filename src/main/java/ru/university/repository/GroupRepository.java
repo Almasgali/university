@@ -3,6 +3,7 @@ package ru.university.repository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.university.model.Curator;
 import ru.university.model.Group;
 
 import java.io.IOException;
@@ -53,7 +54,14 @@ public class GroupRepository implements Repository<Group> {
     @Override
     public void add(Group entity) {
         groups.add(entity);
-        System.out.println("Группа добавлена");
+        saveAll();
+    }
+
+    @Override
+    public void edit(Group entity) {
+        Group currentGroup = groups.stream().filter(c -> c.getId() == entity.getId()).findFirst().orElseThrow();
+        currentGroup.setGroupName(entity.getGroupName());
+        currentGroup.setCuratorId(entity.getCuratorId());
         saveAll();
     }
 
@@ -82,4 +90,8 @@ public class GroupRepository implements Repository<Group> {
         return groups;
     }
 
+    @Override
+    public long getCurId() {
+        return list().get(list().size() - 1).getId();
+    }
 }

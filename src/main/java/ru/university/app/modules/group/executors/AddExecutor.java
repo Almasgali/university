@@ -19,6 +19,9 @@ public class AddExecutor implements Executor<Group> {
             i += 2;
         }
         repository.add(group);
+        if (!args[i - 2].equals("help")) {
+            System.out.println("Группа добавлена");
+        }
     }
 
     public void showHelp() {

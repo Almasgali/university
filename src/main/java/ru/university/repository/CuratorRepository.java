@@ -54,7 +54,14 @@ public class CuratorRepository implements Repository<Curator> {
     @Override
     public void add(Curator entity) {
         curators.add(entity);
-        System.out.println("Куратор добавлен");
+        saveAll();
+    }
+
+    @Override
+    public void edit(Curator entity) {
+        Curator currentCurator = curators.stream().filter(c -> c.getId() == entity.getId()).findFirst().orElseThrow();
+        currentCurator.setSurname(entity.getSurname());
+        currentCurator.setName(entity.getName());
         saveAll();
     }
 
@@ -81,5 +88,10 @@ public class CuratorRepository implements Repository<Curator> {
     @Override
     public List<Curator> list() {
         return curators;
+    }
+
+    @Override
+    public long getCurId() {
+        return list().get(list().size() - 1).getId();
     }
 }

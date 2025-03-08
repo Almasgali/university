@@ -3,6 +3,8 @@ package ru.university.app.modules.curator.executors;
 import ru.university.model.Curator;
 import ru.university.repository.Repository;
 
+import java.util.Arrays;
+
 public class AddExecutor implements Executor<Curator> {
 
     @Override
@@ -19,6 +21,9 @@ public class AddExecutor implements Executor<Curator> {
             i += 2;
         }
         repository.add(curator);
+        if (!args[i - 2].equals("help")) {
+            System.out.println("Куратор добавлен");
+        }
     }
 
     public void showHelp() {

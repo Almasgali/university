@@ -16,6 +16,9 @@ public class EditExecutor implements Executor<Curator> {
                 case "-n" -> curator.setName(args[i + 1]);
             }
             i += 2;
+            if (!args[i - 2].equals("help")) {
+                System.out.println("Данные исправлены");
+            }
         }
     }
 

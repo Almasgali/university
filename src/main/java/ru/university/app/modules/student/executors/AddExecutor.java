@@ -21,6 +21,9 @@ public class AddExecutor implements Executor<Student> {
             i += 2;
         }
         repository.add(student);
+        if (!args[i - 2].equals("help")) {
+            System.out.println("Студент добавлен");
+        }
     }
 
     public void showHelp() {
